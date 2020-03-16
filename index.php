@@ -1,9 +1,12 @@
-<?php
-    
-#Aqui PHP
+<?php  
+function __autoload($c){
+	$path = $_SERVER['DOCUMENT_ROOT'];
+    $path.= "/class/$c.class.php";
+	include_once $path;
+}
 
+$conn = new Conexao();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="PT/BR">
@@ -17,5 +20,13 @@
         <form>
         <!-- i -->
         </form>
+        
+        <?php
+        $conn->consultar("SELECT * FROM candidatos");
+        
+        while($lista = $conn->escrever()){
+            echo $lista['nome'].'<br>';
+        }
+        ?>
     </body>
 </html>
